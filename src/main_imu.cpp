@@ -1,175 +1,72 @@
-#include <chrono>
+#include <conio.h>
+#include <csignal>
+#include <iostream>
 #include <thread>
-
-#include <fastdds/dds/domain/DomainParticipant.hpp>
-#include <fastdds/dds/domain/DomainParticipantFactory.hpp>
-#include <fastdds/dds/publisher/DataWriter.hpp>
-#include <fastdds/dds/publisher/DataWriterListener.hpp>
-#include <fastdds/dds/publisher/Publisher.hpp>
-#include <fastdds/dds/topic/TypeSupport.hpp>
 
 #include <sensor_msgs/msg/ImuPubSubTypes.hpp>
 
-using namespace eprosima::fastdds::dds;
+#include "message_publisher.h"
+#include "node_executor.h"
 
-class ImuPublisher
-{
-private:
-    sensor_msgs::msg::Imu imu;
-    DomainParticipant* participant;
-    Publisher* publisher;
-    Topic* topic;
-    DataWriter* writer;
-    TypeSupport type;
+std::atomic<bool> do_shutdown = false;
 
-    class PubListener : public DataWriterListener
-    {
-    public:
+// NB this will only work for Windows
+// TODO Write a Linux equivalent
+void key_handler() {
+	while (!do_shutdown) {
+		if (_kbhit() && (_getch()=='q')) {
+			do_shutdown = true;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	}
+	std::cout << "Left key_handler\n";
+}
 
-        PubListener() : matched_(0)
-        {
-        }
+template<typename TMessage, typename TType>
+bool run_node(std::string topic_name) {
+	auto thread_keyhandler = std::thread(key_handler);
 
-        ~PubListener() override
-        {
-        }
+	auto message = TMessage();
+	auto publisher = new Message_publisher<TMessage, TType>(message);
 
-        void on_publication_matched(
-            DataWriter*,
-            const PublicationMatchedStatus& info) override
-        {
-            if (info.current_count_change == 1)
-            {
-                matched_ = info.total_count;
-                std::cout << "Publisher matched." << std::endl;
-            }
-            else if (info.current_count_change == -1)
-            {
-                matched_ = info.total_count;
-                std::cout << "Publisher unmatched." << std::endl;
-            }
-            else
-            {
-                std::cout << info.current_count_change
-                    << " is not a valid value for PublicationMatchedStatus current count change." << std::endl;
-            }
-        }
+	if (!publisher->init(topic_name)) {
+		std::cout << "Could not initialize published\n";
+		delete publisher;
+		return false;
+	}
 
-        std::atomic_int matched_;
+	auto thread_publisher = std::thread([&]() {
+		publisher->run();
+		});
 
-    } listener_;
+	auto done = false;
 
-public:
+	while (!done) {
+		if (do_shutdown) {
+			publisher->shutdown();
+			done = true;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
 
-    ImuPublisher()
-        : participant(nullptr)
-        , publisher(nullptr)
-        , topic(nullptr)
-        , writer(nullptr)
-        , type(new sensor_msgs::msg::ImuPubSubType())
-    {
-    }
+	if (thread_keyhandler.joinable()) {
+		thread_keyhandler.join();
+	}
 
-    virtual ~ImuPublisher()
-    {
-        if (writer != nullptr)
-        {
-            publisher->delete_datawriter(writer);
-        }
-        if (publisher != nullptr)
-        {
-            participant->delete_publisher(publisher);
-        }
-        if (topic != nullptr)
-        {
-            participant->delete_topic(topic);
-        }
-        DomainParticipantFactory::get_instance()->delete_participant(participant);
-    }
+	if (thread_publisher.joinable()) {
+		thread_publisher.join();
+	}
 
-    //!Initialize the publisher
-    bool init()
-    {
-        auto initial_orientation_remove_this = imu.orientation();
+	delete publisher;
 
-        DomainParticipantQos participantQos;
-        participantQos.name("participantpublisher");
-        participant = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
+	return true;
+}
 
-        if (participant == nullptr)
-        {
-            return false;
-        }
+int main(int argc, char** argv) {
+	std::cout << "Starting IMU publisher\n";
+	auto topic_name = std::string("rt/ImuTopic");
 
-        // Register the Type
-        type.register_type(participant);
+	auto ret = run_node<sensor_msgs::msg::Imu, sensor_msgs::msg::ImuPubSubType>(topic_name);
 
-        // Create the publications Topic
-        auto qos_topic = TopicQos();
-        // To be ROS2 compatible we add "rt/" before the topic name
-        topic = participant->create_topic("rt/ImuTopic", type.get_type_name(), qos_topic);
-
-        if (topic == nullptr)
-        {
-            return false;
-        }
-
-        // Create the Publisher
-        auto qos_publisher = PublisherQos();
-        publisher = participant->create_publisher(qos_publisher, nullptr);
-
-        if (publisher == nullptr)
-        {
-            return false;
-        }
-
-        // Create the DataWriter
-        writer = publisher->create_datawriter(topic, DATAWRITER_QOS_DEFAULT, &listener_);
-
-        if (writer == nullptr)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    //!Send a publication
-    bool publish()
-    {
-        writer->write(&imu);
-        return true;
-    }
-
-    //!Run the Publisher
-    void run(
-        uint32_t samples)
-    {
-        uint32_t samples_sent = 0;
-        while (samples_sent < samples)
-        {
-            if (publish())
-            {
-                samples_sent++;
-                std::cout << "Message: " << "NOT YET DEFINED" << " SENT" << std::endl;
-            }
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        }
-    }
-};
-
-int main(
-    int argc,
-    char** argv)
-{
-    std::cout << "Starting publisher." << std::endl;
-    uint32_t samples = 100;
-
-    ImuPublisher* mypub = new ImuPublisher();
-    if (mypub->init())
-    {
-        mypub->run(samples);
-    }
-
-    delete mypub;
-    return 0;
+	return (ret ? 0 : 1);
 }

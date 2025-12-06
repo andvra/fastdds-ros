@@ -1,5 +1,7 @@
 #pragma once
 
+#include <conio.h>
+
 #include "message_publisher.h"
 
 template<typename TMessage, typename TType>
@@ -16,7 +18,8 @@ private:
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
-		std::cout << "Left key_handler\n";
+
+		std::cout << "Shutting down..\n";
 	}
 
 public:

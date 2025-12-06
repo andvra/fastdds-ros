@@ -1,5 +1,3 @@
-#include <conio.h>
-#include <csignal>
 #include <iostream>
 #include <thread>
 

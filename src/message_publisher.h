@@ -145,12 +145,12 @@ public:
 		while (!done) {
 			if (publish()) {
 				samples_sent++;
-				std::cout << "Message: " << "NOT YET DEFINED" << samples_sent << std::endl;
+				std::cout << "Posting message of type " << type.get_type_name() << ". It has ID " << samples_sent << std::endl;
 			}
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		}
 
-		std::cout << "Leaving the run() function..\n";
+		std::cout << "Stopped publishing\n";
 	}
 };

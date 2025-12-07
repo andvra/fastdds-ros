@@ -167,20 +167,3 @@ public:
     }
 
 };
-
-//int main(
-//    int argc,
-//    char** argv)
-//{
-//    std::cout << "Starting subscriber." << std::endl;
-//    uint32_t samples = 10;
-//
-//    HelloWorldSubscriber* mysub = new HelloWorldSubscriber();
-//    if (mysub->init())
-//    {
-//        mysub->run(samples);
-//    }
-//
-//    delete mysub;
-//    return 0;
-//}

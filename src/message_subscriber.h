@@ -34,6 +34,35 @@ private:
 
         ~SubListener() override {
         }
+        void on_liveliness_changed(
+            DataReader* reader,
+            const LivelinessChangedStatus& status) override {
+            std::cout << "Liveliness changed\n";
+        }
+
+        void on_requested_deadline_missed(
+            DataReader* reader,
+            const RequestedDeadlineMissedStatus& status) override {
+            std::cout << "Request deadline missed\n";
+        }
+
+        void on_sample_rejected(
+            DataReader* reader,
+            const SampleRejectedStatus& status) override {
+            std::cout << "Sample rejected\n";
+        }
+
+        void on_requested_incompatible_qos(
+            DataReader* reader,
+            const RequestedIncompatibleQosStatus& status) override {
+            std::cout << "Requested incompatible QoS\n";
+        }
+
+        void on_sample_lost(
+            DataReader* reader,
+            const SampleLostStatus& status) override {
+            std::cout << "Sample lost\n";
+        }
 
         void on_subscription_matched(DataReader*, const SubscriptionMatchedStatus& info) override {
             if (info.current_count_change == 1) {

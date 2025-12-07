@@ -132,7 +132,6 @@ public:
 		done = true;
 	}
 
-	//!Run the Publisher
 	void run() {
 		uint32_t samples_sent = 0;
 

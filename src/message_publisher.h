@@ -46,8 +46,7 @@ private:
 				std::cout << "Publisher unmatched." << std::endl;
 			}
 			else {
-				std::cout << info.current_count_change
-					<< " is not a valid value for PublicationMatchedStatus current count change." << std::endl;
+				std::cout << info.current_count_change << " is not a valid value for PublicationMatchedStatus current count change." << std::endl;
 			}
 		}
 
@@ -57,9 +56,7 @@ private:
 
 	PubListener listener;
 	bool done = false;
-
 public:
-
 	Message_publisher(TMessage initial_message = {})
 		: participant(nullptr)
 		, publisher(nullptr)
@@ -97,10 +94,7 @@ public:
 
 		// Register the Type
 		type.register_type(participant);
-
-		// Create the publications Topic
 		auto qos_topic = TopicQos();
-		// To be ROS2 compatible we add "rt/" before the topic name
 		topic = participant->create_topic(topic_name, type.get_type_name(), qos_topic);
 
 		if (topic == nullptr) {

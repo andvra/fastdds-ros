@@ -6,12 +6,13 @@
 #include "node_executor.h"
 
 int main(int argc, char** argv) {
-	std::cout << "Starting GPS publisher\n";
-	auto topic_name = std::string("rt/GpsTopic");
+	std::cout << "Starting GPS node\n";
+	auto topic_name_publisher = std::string("rt/GpsTopic");
+	auto topic_name_subscriber = std::string("rt/fix");
 
 	Node_executor<sensor_msgs::msg::NavSatFix, sensor_msgs::msg::NavSatFixPubSubType> node_executor = {};
 
-	auto ret = node_executor.run_node(topic_name);
+	auto ret = node_executor.run_node(topic_name_publisher, topic_name_subscriber);
 
 	return (ret ? 0 : 1);
 }

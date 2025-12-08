@@ -86,19 +86,6 @@ void register_Time_type_identifier(
             MemberName name_sec = "sec";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_sec;
             ann_custom_Time.reset();
-            AppliedAnnotationSeq tmp_ann_custom_sec;
-            eprosima::fastcdr::optional<std::string> unit_sec;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_sec;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_sec;
-            eprosima::fastcdr::optional<std::string> hash_id_sec;
-            if (unit_sec.has_value() || min_sec.has_value() || max_sec.has_value() || hash_id_sec.has_value())
-            {
-                member_ann_builtin_sec = TypeObjectUtils::build_applied_builtin_member_annotations(unit_sec, min_sec, max_sec, hash_id_sec);
-            }
-            if (!tmp_ann_custom_sec.empty())
-            {
-                ann_custom_Time = tmp_ann_custom_sec;
-            }
             CompleteMemberDetail detail_sec = TypeObjectUtils::build_complete_member_detail(name_sec, member_ann_builtin_sec, ann_custom_Time);
             CompleteStructMember member_sec = TypeObjectUtils::build_complete_struct_member(common_sec, detail_sec);
             TypeObjectUtils::add_complete_struct_member(member_seq_Time, member_sec);
@@ -129,19 +116,6 @@ void register_Time_type_identifier(
             MemberName name_nanosec = "nanosec";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_nanosec;
             ann_custom_Time.reset();
-            AppliedAnnotationSeq tmp_ann_custom_nanosec;
-            eprosima::fastcdr::optional<std::string> unit_nanosec;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_nanosec;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_nanosec;
-            eprosima::fastcdr::optional<std::string> hash_id_nanosec;
-            if (unit_nanosec.has_value() || min_nanosec.has_value() || max_nanosec.has_value() || hash_id_nanosec.has_value())
-            {
-                member_ann_builtin_nanosec = TypeObjectUtils::build_applied_builtin_member_annotations(unit_nanosec, min_nanosec, max_nanosec, hash_id_nanosec);
-            }
-            if (!tmp_ann_custom_nanosec.empty())
-            {
-                ann_custom_Time = tmp_ann_custom_nanosec;
-            }
             CompleteMemberDetail detail_nanosec = TypeObjectUtils::build_complete_member_detail(name_nanosec, member_ann_builtin_nanosec, ann_custom_Time);
             CompleteStructMember member_nanosec = TypeObjectUtils::build_complete_struct_member(common_nanosec, detail_nanosec);
             TypeObjectUtils::add_complete_struct_member(member_seq_Time, member_nanosec);

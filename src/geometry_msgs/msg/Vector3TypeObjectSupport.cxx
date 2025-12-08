@@ -86,19 +86,6 @@ void register_Vector3_type_identifier(
             MemberName name_x = "x";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_x;
             ann_custom_Vector3.reset();
-            AppliedAnnotationSeq tmp_ann_custom_x;
-            eprosima::fastcdr::optional<std::string> unit_x;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_x;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_x;
-            eprosima::fastcdr::optional<std::string> hash_id_x;
-            if (unit_x.has_value() || min_x.has_value() || max_x.has_value() || hash_id_x.has_value())
-            {
-                member_ann_builtin_x = TypeObjectUtils::build_applied_builtin_member_annotations(unit_x, min_x, max_x, hash_id_x);
-            }
-            if (!tmp_ann_custom_x.empty())
-            {
-                ann_custom_Vector3 = tmp_ann_custom_x;
-            }
             CompleteMemberDetail detail_x = TypeObjectUtils::build_complete_member_detail(name_x, member_ann_builtin_x, ann_custom_Vector3);
             CompleteStructMember member_x = TypeObjectUtils::build_complete_struct_member(common_x, detail_x);
             TypeObjectUtils::add_complete_struct_member(member_seq_Vector3, member_x);

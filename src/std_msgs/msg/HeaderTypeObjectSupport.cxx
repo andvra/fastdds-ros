@@ -85,19 +85,6 @@ void register_Header_type_identifier(
             MemberName name_stamp = "stamp";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_stamp;
             ann_custom_Header.reset();
-            AppliedAnnotationSeq tmp_ann_custom_stamp;
-            eprosima::fastcdr::optional<std::string> unit_stamp;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_stamp;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_stamp;
-            eprosima::fastcdr::optional<std::string> hash_id_stamp;
-            if (unit_stamp.has_value() || min_stamp.has_value() || max_stamp.has_value() || hash_id_stamp.has_value())
-            {
-                member_ann_builtin_stamp = TypeObjectUtils::build_applied_builtin_member_annotations(unit_stamp, min_stamp, max_stamp, hash_id_stamp);
-            }
-            if (!tmp_ann_custom_stamp.empty())
-            {
-                ann_custom_Header = tmp_ann_custom_stamp;
-            }
             CompleteMemberDetail detail_stamp = TypeObjectUtils::build_complete_member_detail(name_stamp, member_ann_builtin_stamp, ann_custom_Header);
             CompleteStructMember member_stamp = TypeObjectUtils::build_complete_struct_member(common_stamp, detail_stamp);
             TypeObjectUtils::add_complete_struct_member(member_seq_Header, member_stamp);
@@ -136,19 +123,6 @@ void register_Header_type_identifier(
             MemberName name_frame_id = "frame_id";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_frame_id;
             ann_custom_Header.reset();
-            AppliedAnnotationSeq tmp_ann_custom_frame_id;
-            eprosima::fastcdr::optional<std::string> unit_frame_id;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_frame_id;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_frame_id;
-            eprosima::fastcdr::optional<std::string> hash_id_frame_id;
-            if (unit_frame_id.has_value() || min_frame_id.has_value() || max_frame_id.has_value() || hash_id_frame_id.has_value())
-            {
-                member_ann_builtin_frame_id = TypeObjectUtils::build_applied_builtin_member_annotations(unit_frame_id, min_frame_id, max_frame_id, hash_id_frame_id);
-            }
-            if (!tmp_ann_custom_frame_id.empty())
-            {
-                ann_custom_Header = tmp_ann_custom_frame_id;
-            }
             CompleteMemberDetail detail_frame_id = TypeObjectUtils::build_complete_member_detail(name_frame_id, member_ann_builtin_frame_id, ann_custom_Header);
             CompleteStructMember member_frame_id = TypeObjectUtils::build_complete_struct_member(common_frame_id, detail_frame_id);
             TypeObjectUtils::add_complete_struct_member(member_seq_Header, member_frame_id);

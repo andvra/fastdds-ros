@@ -144,6 +144,13 @@ void register_NavSatFix_type_identifier(
         QualifiedTypeName type_name_NavSatFix = "sensor_msgs::msg::dds_::NavSatFix_";
         eprosima::fastcdr::optional<AppliedBuiltinTypeAnnotations> type_ann_builtin_NavSatFix;
         eprosima::fastcdr::optional<AppliedAnnotationSeq> ann_custom_NavSatFix;
+        AppliedAnnotationSeq tmp_ann_custom_NavSatFix;
+        eprosima::fastcdr::optional<AppliedVerbatimAnnotation> verbatim_NavSatFix;
+        if (!tmp_ann_custom_NavSatFix.empty())
+        {
+            ann_custom_NavSatFix = tmp_ann_custom_NavSatFix;
+        }
+
         CompleteTypeDetail detail_NavSatFix = TypeObjectUtils::build_complete_type_detail(type_ann_builtin_NavSatFix, ann_custom_NavSatFix, type_name_NavSatFix.to_string());
         CompleteStructHeader header_NavSatFix;
         header_NavSatFix = TypeObjectUtils::build_complete_struct_header(TypeIdentifier(), detail_NavSatFix);
@@ -172,19 +179,6 @@ void register_NavSatFix_type_identifier(
             MemberName name_header = "header";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_header;
             ann_custom_NavSatFix.reset();
-            AppliedAnnotationSeq tmp_ann_custom_header;
-            eprosima::fastcdr::optional<std::string> unit_header;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_header;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_header;
-            eprosima::fastcdr::optional<std::string> hash_id_header;
-            if (unit_header.has_value() || min_header.has_value() || max_header.has_value() || hash_id_header.has_value())
-            {
-                member_ann_builtin_header = TypeObjectUtils::build_applied_builtin_member_annotations(unit_header, min_header, max_header, hash_id_header);
-            }
-            if (!tmp_ann_custom_header.empty())
-            {
-                ann_custom_NavSatFix = tmp_ann_custom_header;
-            }
             CompleteMemberDetail detail_header = TypeObjectUtils::build_complete_member_detail(name_header, member_ann_builtin_header, ann_custom_NavSatFix);
             CompleteStructMember member_header = TypeObjectUtils::build_complete_struct_member(common_header, detail_header);
             TypeObjectUtils::add_complete_struct_member(member_seq_NavSatFix, member_header);
@@ -213,19 +207,6 @@ void register_NavSatFix_type_identifier(
             MemberName name_status = "status";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_status;
             ann_custom_NavSatFix.reset();
-            AppliedAnnotationSeq tmp_ann_custom_status;
-            eprosima::fastcdr::optional<std::string> unit_status;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_status;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_status;
-            eprosima::fastcdr::optional<std::string> hash_id_status;
-            if (unit_status.has_value() || min_status.has_value() || max_status.has_value() || hash_id_status.has_value())
-            {
-                member_ann_builtin_status = TypeObjectUtils::build_applied_builtin_member_annotations(unit_status, min_status, max_status, hash_id_status);
-            }
-            if (!tmp_ann_custom_status.empty())
-            {
-                ann_custom_NavSatFix = tmp_ann_custom_status;
-            }
             CompleteMemberDetail detail_status = TypeObjectUtils::build_complete_member_detail(name_status, member_ann_builtin_status, ann_custom_NavSatFix);
             CompleteStructMember member_status = TypeObjectUtils::build_complete_struct_member(common_status, detail_status);
             TypeObjectUtils::add_complete_struct_member(member_seq_NavSatFix, member_status);
@@ -262,7 +243,6 @@ void register_NavSatFix_type_identifier(
             eprosima::fastcdr::optional<AnnotationParameterValue> max_latitude;
             eprosima::fastcdr::optional<std::string> hash_id_latitude;
             unit_latitude = "degrees";
-
 
             if (unit_latitude.has_value() || min_latitude.has_value() || max_latitude.has_value() || hash_id_latitude.has_value())
             {
@@ -309,7 +289,6 @@ void register_NavSatFix_type_identifier(
             eprosima::fastcdr::optional<std::string> hash_id_longitude;
             unit_longitude = "degrees";
 
-
             if (unit_longitude.has_value() || min_longitude.has_value() || max_longitude.has_value() || hash_id_longitude.has_value())
             {
                 member_ann_builtin_longitude = TypeObjectUtils::build_applied_builtin_member_annotations(unit_longitude, min_longitude, max_longitude, hash_id_longitude);
@@ -355,7 +334,6 @@ void register_NavSatFix_type_identifier(
             eprosima::fastcdr::optional<std::string> hash_id_altitude;
             unit_altitude = "m";
 
-
             if (unit_altitude.has_value() || min_altitude.has_value() || max_altitude.has_value() || hash_id_altitude.has_value())
             {
                 member_ann_builtin_altitude = TypeObjectUtils::build_applied_builtin_member_annotations(unit_altitude, min_altitude, max_altitude, hash_id_altitude);
@@ -398,7 +376,6 @@ void register_NavSatFix_type_identifier(
             eprosima::fastcdr::optional<AnnotationParameterValue> max_position_covariance;
             eprosima::fastcdr::optional<std::string> hash_id_position_covariance;
             unit_position_covariance = "m^2";
-
 
             if (unit_position_covariance.has_value() || min_position_covariance.has_value() || max_position_covariance.has_value() || hash_id_position_covariance.has_value())
             {

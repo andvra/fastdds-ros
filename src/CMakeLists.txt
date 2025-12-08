@@ -27,9 +27,9 @@ set(SOURCES_IDL_POS
 add_executable(${TARGET_NAME_IMU} "main_imu.cpp" ${SOURCES_IDL_COMMON} ${SOURCES_IDL_IMU})
 add_executable(${TARGET_NAME_POS} "main_pos.cpp" ${SOURCES_IDL_COMMON} ${SOURCES_IDL_POS})
 
-find_package(OpenSSL REQUIRED PATHS "D:\\work\\vcpkg\\installed\\x64-windows\\share\\openssl")
-find_package(fastcdr REQUIRED PATHS "C:\\Program Files\\eProsima\\fastdds 3.2.2\\share\\fastcdr-x64Win64VS2019\\cmake")
-find_package(fastdds REQUIRED  PATHS "C:\\Program Files\\eProsima\\fastdds 3.2.2\\share\\fastdds-x64Win64VS2019\\cmake")
+find_package(OpenSSL REQUIRED PATHS "D:/dev/vcpkg/installed/x64-windows/share/openssl")
+find_package(fastcdr REQUIRED PATHS "C:/Program Files/eProsima/fastdds 3.2.2/share/fastcdr-x64Win64VS2019/cmake")
+find_package(fastdds REQUIRED  PATHS "C:/Program Files/eProsima/fastdds 3.2.2/share/fastdds-x64Win64VS2019/cmake")
 
 target_include_directories(${TARGET_NAME_IMU} PUBLIC .)
 target_link_libraries(${TARGET_NAME_IMU} PUBLIC fastcdr fastdds)

@@ -1,6 +1,6 @@
 ## TODO
 
-- Test: if we publish String through ROS2 in the same fashion as we publish NavSatFix, can we then successfully read it?
+D Test: if we publish String through ROS2 in the same fashion as we publish NavSatFix, can we then successfully read it?
 - Update paths used in CMakeLists
 D Add listeners to update IMU/GPS data
 - Describe how this app was built
@@ -22,3 +22,6 @@ D Add listeners to update IMU/GPS data
 	- ros2 topic pub /fix sensor_msgs/msg/NavSatFix "{}"
 - Using eProsima Fast DDS Monitor is useful for seeing if publisher and subscriber actually match. TODO: expand this note. Write that QoS also matters, how to fix etc
 - To see what nodes are using a topic: ros2 topic info \<topic> -v . Topic can be something like /gps_message
+
+
+## IDL cleaning: remove all @verbatim. Add @final before the struct for the structs that we generate from, eg. IMU and NavSatFix

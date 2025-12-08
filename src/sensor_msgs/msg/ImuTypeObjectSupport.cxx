@@ -143,6 +143,13 @@ void register_Imu_type_identifier(
         QualifiedTypeName type_name_Imu = "sensor_msgs::msg::dds_::Imu_";
         eprosima::fastcdr::optional<AppliedBuiltinTypeAnnotations> type_ann_builtin_Imu;
         eprosima::fastcdr::optional<AppliedAnnotationSeq> ann_custom_Imu;
+        AppliedAnnotationSeq tmp_ann_custom_Imu;
+        eprosima::fastcdr::optional<AppliedVerbatimAnnotation> verbatim_Imu;
+        if (!tmp_ann_custom_Imu.empty())
+        {
+            ann_custom_Imu = tmp_ann_custom_Imu;
+        }
+
         CompleteTypeDetail detail_Imu = TypeObjectUtils::build_complete_type_detail(type_ann_builtin_Imu, ann_custom_Imu, type_name_Imu.to_string());
         CompleteStructHeader header_Imu;
         header_Imu = TypeObjectUtils::build_complete_struct_header(TypeIdentifier(), detail_Imu);
@@ -227,19 +234,6 @@ void register_Imu_type_identifier(
             MemberName name_orientation_covariance = "orientation_covariance";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_orientation_covariance;
             ann_custom_Imu.reset();
-            AppliedAnnotationSeq tmp_ann_custom_orientation_covariance;
-            eprosima::fastcdr::optional<std::string> unit_orientation_covariance;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_orientation_covariance;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_orientation_covariance;
-            eprosima::fastcdr::optional<std::string> hash_id_orientation_covariance;
-            if (unit_orientation_covariance.has_value() || min_orientation_covariance.has_value() || max_orientation_covariance.has_value() || hash_id_orientation_covariance.has_value())
-            {
-                member_ann_builtin_orientation_covariance = TypeObjectUtils::build_applied_builtin_member_annotations(unit_orientation_covariance, min_orientation_covariance, max_orientation_covariance, hash_id_orientation_covariance);
-            }
-            if (!tmp_ann_custom_orientation_covariance.empty())
-            {
-                ann_custom_Imu = tmp_ann_custom_orientation_covariance;
-            }
             CompleteMemberDetail detail_orientation_covariance = TypeObjectUtils::build_complete_member_detail(name_orientation_covariance, member_ann_builtin_orientation_covariance, ann_custom_Imu);
             CompleteStructMember member_orientation_covariance = TypeObjectUtils::build_complete_struct_member(common_orientation_covariance, detail_orientation_covariance);
             TypeObjectUtils::add_complete_struct_member(member_seq_Imu, member_orientation_covariance);
@@ -296,19 +290,6 @@ void register_Imu_type_identifier(
             MemberName name_angular_velocity_covariance = "angular_velocity_covariance";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_angular_velocity_covariance;
             ann_custom_Imu.reset();
-            AppliedAnnotationSeq tmp_ann_custom_angular_velocity_covariance;
-            eprosima::fastcdr::optional<std::string> unit_angular_velocity_covariance;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_angular_velocity_covariance;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_angular_velocity_covariance;
-            eprosima::fastcdr::optional<std::string> hash_id_angular_velocity_covariance;
-            if (unit_angular_velocity_covariance.has_value() || min_angular_velocity_covariance.has_value() || max_angular_velocity_covariance.has_value() || hash_id_angular_velocity_covariance.has_value())
-            {
-                member_ann_builtin_angular_velocity_covariance = TypeObjectUtils::build_applied_builtin_member_annotations(unit_angular_velocity_covariance, min_angular_velocity_covariance, max_angular_velocity_covariance, hash_id_angular_velocity_covariance);
-            }
-            if (!tmp_ann_custom_angular_velocity_covariance.empty())
-            {
-                ann_custom_Imu = tmp_ann_custom_angular_velocity_covariance;
-            }
             CompleteMemberDetail detail_angular_velocity_covariance = TypeObjectUtils::build_complete_member_detail(name_angular_velocity_covariance, member_ann_builtin_angular_velocity_covariance, ann_custom_Imu);
             CompleteStructMember member_angular_velocity_covariance = TypeObjectUtils::build_complete_struct_member(common_angular_velocity_covariance, detail_angular_velocity_covariance);
             TypeObjectUtils::add_complete_struct_member(member_seq_Imu, member_angular_velocity_covariance);
@@ -365,19 +346,6 @@ void register_Imu_type_identifier(
             MemberName name_linear_acceleration_covariance = "linear_acceleration_covariance";
             eprosima::fastcdr::optional<AppliedBuiltinMemberAnnotations> member_ann_builtin_linear_acceleration_covariance;
             ann_custom_Imu.reset();
-            AppliedAnnotationSeq tmp_ann_custom_linear_acceleration_covariance;
-            eprosima::fastcdr::optional<std::string> unit_linear_acceleration_covariance;
-            eprosima::fastcdr::optional<AnnotationParameterValue> min_linear_acceleration_covariance;
-            eprosima::fastcdr::optional<AnnotationParameterValue> max_linear_acceleration_covariance;
-            eprosima::fastcdr::optional<std::string> hash_id_linear_acceleration_covariance;
-            if (unit_linear_acceleration_covariance.has_value() || min_linear_acceleration_covariance.has_value() || max_linear_acceleration_covariance.has_value() || hash_id_linear_acceleration_covariance.has_value())
-            {
-                member_ann_builtin_linear_acceleration_covariance = TypeObjectUtils::build_applied_builtin_member_annotations(unit_linear_acceleration_covariance, min_linear_acceleration_covariance, max_linear_acceleration_covariance, hash_id_linear_acceleration_covariance);
-            }
-            if (!tmp_ann_custom_linear_acceleration_covariance.empty())
-            {
-                ann_custom_Imu = tmp_ann_custom_linear_acceleration_covariance;
-            }
             CompleteMemberDetail detail_linear_acceleration_covariance = TypeObjectUtils::build_complete_member_detail(name_linear_acceleration_covariance, member_ann_builtin_linear_acceleration_covariance, ann_custom_Imu);
             CompleteStructMember member_linear_acceleration_covariance = TypeObjectUtils::build_complete_struct_member(common_linear_acceleration_covariance, detail_linear_acceleration_covariance);
             TypeObjectUtils::add_complete_struct_member(member_seq_Imu, member_linear_acceleration_covariance);
